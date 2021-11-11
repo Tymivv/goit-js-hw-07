@@ -16,15 +16,21 @@ const gal = galleryItems.map(({ preview, original, description }) =>
     />
   </a>
 </div>`).join('');
-galleryRef.insertAdjacentHTML('beforebegin', gal);
+galleryRef.insertAdjacentHTML('beforeend', gal);
 
 
 
-const onGalleryClick = (e) => {
-    e.preventDefault();
-    if (e.target.nodeName !== 'IMG') {
-        return;
-    }
-    
-}
-galleryRef.addEventListener('click', onGalleryClick);
+galleryRef.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (e.target.nodeName !== 'IMG') {
+    return;
+  }
+  const instance = basicLightbox.create(`
+    <img src="${e.target.dataset.source}" width="800" height="600">`);
+  
+
+  instance.show();
+
+})
+
+
